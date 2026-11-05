@@ -1,0 +1,25 @@
+{
+  "name": "映场设备仓管",
+  "appid": "",
+  "description": "影视机械器材多仓库管理",
+  "versionName": "0.1.0",
+  "versionCode": "100",
+  "transformPx": false,
+  "mp-weixin": {
+    "appid": "",
+    "setting": {
+      "urlCheck": false
+    },
+    "usingComponents": true
+  },
+  "h5": {
+    "router": {
+      "mode": "hash"
+    },
+    "title": "映场设备仓管"
+  },
+  "vueVersion": "3",
+  "uniStatistics": {
+    "enable": false
+  }
+}

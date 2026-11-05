@@ -1,0 +1,26 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {DatabaseSync} from 'node:sqlite';
+import {mkdtempSync,readFileSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join,resolve} from 'node:path';
+import {spawnSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+const tables=['users','owners','warehouses','equipment','aliases','crews','assets','documents','allocations','holds','returns','transfers','imports','templates','attachments','audit'];
+for(const version of [1,2]) test('SQLite版本'+version+'只读导出、归类及幂等记录保留',()=>{
+  const dir=mkdtempSync(join(tmpdir(),'warehouse-export-')),source=join(dir,'warehouse.sqlite'),target=join(dir,'migration.json');
+  const db=new DatabaseSync(source);
+  for(const table of tables)db.exec(`CREATE TABLE ${table}(id TEXT PRIMARY KEY); INSERT INTO ${table} VALUES ('${table}-id')`);
+  db.exec('CREATE TABLE categories(id TEXT PRIMARY KEY,name TEXT); INSERT INTO categories VALUES (\'cat\',\'摇臂类\'); CREATE TABLE idempotency(key TEXT PRIMARY KEY,result_json TEXT); INSERT INTO idempotency VALUES (\'confirmed-key\',\'{"id":"doc"}\'); CREATE TABLE sessions(token_hash TEXT); INSERT INTO sessions VALUES (\'private-session\')');
+  if(version===2)db.exec('CREATE TABLE category_groups(id TEXT PRIMARY KEY,name TEXT); INSERT INTO category_groups VALUES (\'group\',\'机械器材\'); ALTER TABLE categories ADD COLUMN group_id TEXT; UPDATE categories SET group_id=\'group\'');
+  db.exec('PRAGMA user_version='+version); db.close();
+  const before=createHash('sha256').update(readFileSync(source)).digest('hex');
+  const run=()=>spawnSync(process.execPath,[resolve('scripts/export-sqlite.mjs'),source,target],{encoding:'utf8'});
+  let result=run();assert.equal(result.status,0,result.stderr);
+  const output=JSON.parse(readFileSync(target,'utf8'));
+  assert.equal(output.tables.categories[0].group_id,version===1?null:'group');
+  assert.equal(output.tables.category_groups.length,version===1?0:1);
+  assert.equal(output.tables.idempotency[0].key,'confirmed-key');assert.equal(output.tables.sessions,undefined);
+  assert.equal(createHash('sha256').update(readFileSync(source)).digest('hex'),before);
+  assert.notEqual(run().status,0);assert.equal(JSON.parse(readFileSync(target,'utf8')).tables.categories[0].id,'cat');
+});

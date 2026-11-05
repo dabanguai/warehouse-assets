@@ -1,0 +1,125 @@
+{
+  "pages": [
+    {
+      "path": "pages/login/index",
+      "style": {
+        "navigationBarTitleText": "登录"
+      }
+    },
+    {
+      "path": "pages/inventory/index",
+      "style": {
+        "navigationBarTitleText": "库存"
+      }
+    },
+    {
+      "path": "pages/crews/index",
+      "style": {
+        "navigationBarTitleText": "剧组"
+      }
+    },
+    {
+      "path": "pages/documents/index",
+      "style": {
+        "navigationBarTitleText": "单据管理"
+      }
+    },
+    {
+      "path": "pages/manage/index",
+      "style": {
+        "navigationBarTitleText": "管理"
+      }
+    },
+    {
+      "path": "pages/equipment/index",
+      "style": {
+        "navigationBarTitleText": "设备详情"
+      }
+    },
+    {
+      "path": "pages/crew/index",
+      "style": {
+        "navigationBarTitleText": "剧组详情"
+      }
+    },
+    {
+      "path": "pages/document/index",
+      "style": {
+        "navigationBarTitleText": "单据详情"
+      }
+    },
+    {
+      "path": "pages/editor/index",
+      "style": {
+        "navigationBarTitleText": "业务录入"
+      }
+    },
+    {
+      "path": "pages/import/index",
+      "style": {
+        "navigationBarTitleText": "Excel批量处理"
+      }
+    },
+    {
+      "path": "pages/supply/index",
+      "style": {
+        "navigationBarTitleText": "租期可供"
+      }
+    },
+    {
+      "path": "pages/audit/index",
+      "style": {
+        "navigationBarTitleText": "操作及更正记录"
+      }
+    },
+    {
+      "path": "pages/asset-manage/index",
+      "style": {
+        "navigationBarTitleText": "资产管理"
+      }
+    },
+    {
+      "path": "pages/catalog/index",
+      "style": {
+        "navigationBarTitleText": "资料管理"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#f5f7fa",
+    "backgroundColor": "#f5f7fa"
+  },
+  "tabBar": {
+    "color": "#8b97aa",
+    "selectedColor": "#1768ea",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/inventory/index",
+        "text": "库存",
+        "iconPath": "static/inventory.png",
+        "selectedIconPath": "static/inventory-active.png"
+      },
+      {
+        "pagePath": "pages/crews/index",
+        "text": "剧组",
+        "iconPath": "static/crews.png",
+        "selectedIconPath": "static/crews-active.png"
+      },
+      {
+        "pagePath": "pages/documents/index",
+        "text": "单据",
+        "iconPath": "static/documents.png",
+        "selectedIconPath": "static/documents-active.png"
+      },
+      {
+        "pagePath": "pages/manage/index",
+        "text": "管理",
+        "iconPath": "static/manage.png",
+        "selectedIconPath": "static/manage-active.png"
+      }
+    ]
+  }
+}

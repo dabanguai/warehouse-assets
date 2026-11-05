@@ -1,0 +1,1769 @@
+{
+  "initialReview": {
+    "type": "object",
+    "required": [
+      "expectedVersion",
+      "total",
+      "beijing",
+      "hengdian",
+      "reason"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "expectedVersion": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "total": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 10000000
+      },
+      "beijing": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 10000000
+      },
+      "hengdian": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 10000000
+      },
+      "reason": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1000,
+        "pattern": "\\S"
+      }
+    }
+  },
+  "category": {
+    "type": "object",
+    "required": [
+      "name"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "name": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100,
+        "pattern": "\\S"
+      },
+      "active": {
+        "type": "boolean"
+      },
+      "groupId": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "minLength": 1,
+        "maxLength": 100
+      }
+    }
+  },
+  "categoryGroup": {
+    "type": "object",
+    "required": [
+      "name"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "name": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100,
+        "pattern": "\\S"
+      },
+      "active": {
+        "type": "boolean"
+      }
+    }
+  },
+  "date": {
+    "type": "string",
+    "format": "date"
+  },
+  "draft": {
+    "type": "object",
+    "required": [
+      "number",
+      "type",
+      "businessDate",
+      "payload"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "number": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100
+      },
+      "type": {
+        "type": "string",
+        "enum": [
+          "INITIAL",
+          "PURCHASE",
+          "OUTBOUND",
+          "RESERVATION",
+          "RETURN",
+          "TRANSFER"
+        ]
+      },
+      "businessDate": {
+        "type": "string",
+        "format": "date"
+      },
+      "payload": {
+        "type": "object",
+        "required": [
+          "rows"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "rows": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 3000,
+            "items": {
+              "type": "object",
+              "required": [
+                "quantity"
+              ],
+              "additionalProperties": true,
+              "properties": {
+                "equipmentId": {
+                  "type": "string",
+                  "maxLength": 500
+                },
+                "rawName": {
+                  "type": "string",
+                  "maxLength": 500
+                },
+                "quantity": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 10000000
+                },
+                "partNo": {
+                  "type": "string",
+                  "maxLength": 80
+                },
+                "ownerId": {
+                  "type": "integer",
+                  "enum": [
+                    1,
+                    2
+                  ]
+                },
+                "owner2Quantity": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "warehouseId": {
+                  "type": "string",
+                  "enum": [
+                    "beijing",
+                    "hengdian"
+                  ]
+                },
+                "serials": {
+                  "type": "array",
+                  "maxItems": 10000,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100
+                  }
+                },
+                "note": {
+                  "type": "string",
+                  "maxLength": 10000
+                },
+                "unmanaged": {
+                  "type": "boolean"
+                },
+                "allocationId": {
+                  "type": "string",
+                  "maxLength": 500
+                },
+                "createEquipment": {
+                  "type": "boolean"
+                },
+                "category": {
+                  "type": "string",
+                  "maxLength": 500
+                },
+                "categoryId": {
+                  "type": "string",
+                  "maxLength": 500
+                },
+                "categoryGroup": {
+                  "type": "string",
+                  "maxLength": 500
+                },
+                "unit": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 20
+                },
+                "assetId": {
+                  "type": "string",
+                  "maxLength": 500
+                },
+                "initial": {
+                  "type": "object",
+                  "required": [
+                    "total",
+                    "beijing",
+                    "hengdian",
+                    "outbounds"
+                  ],
+                  "properties": {
+                    "total": {
+                      "type": [
+                        "number",
+                        "null"
+                      ],
+                      "minimum": 0
+                    },
+                    "beijing": {
+                      "type": [
+                        "number",
+                        "null"
+                      ],
+                      "minimum": 0
+                    },
+                    "hengdian": {
+                      "type": [
+                        "number",
+                        "null"
+                      ],
+                      "minimum": 0
+                    },
+                    "outbounds": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "name",
+                          "quantity"
+                        ],
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 300
+                          },
+                          "quantity": {
+                            "type": "number",
+                            "minimum": 0
+                          },
+                          "availableDate": {
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "kind": {
+                            "type": "string",
+                            "enum": [
+                              "CREW",
+                              "OTHER"
+                            ]
+                          },
+                          "crewId": {
+                            "type": "string",
+                            "maxLength": 100
+                          },
+                          "relatedCrewId": {
+                            "type": "string",
+                            "maxLength": 100
+                          },
+                          "groupName": {
+                            "type": "string",
+                            "maxLength": 100
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "warehouseId": {
+            "type": "string",
+            "enum": [
+              "beijing",
+              "hengdian"
+            ]
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "availableDate": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "crewId": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "groupName": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 10000
+          },
+          "importId": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "targetWarehouseId": {
+            "type": "string",
+            "enum": [
+              "beijing",
+              "hengdian"
+            ]
+          },
+          "returnDate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    }
+  },
+  "equipment": {
+    "type": "object",
+    "required": [
+      "name",
+      "categoryId",
+      "unit"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "name": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 500
+      },
+      "englishName": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "categoryId": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "brand": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "model": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "specification": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "unit": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 20
+      },
+      "active": {
+        "type": "boolean"
+      },
+      "aliases": {
+        "type": "array",
+        "maxItems": 100,
+        "items": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      }
+    }
+  },
+  "payload": {
+    "type": "object",
+    "required": [
+      "rows"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "rows": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 3000,
+        "items": {
+          "type": "object",
+          "required": [
+            "quantity"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "equipmentId": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "rawName": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "quantity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 10000000
+            },
+            "partNo": {
+              "type": "string",
+              "maxLength": 80
+            },
+            "ownerId": {
+              "type": "integer",
+              "enum": [
+                1,
+                2
+              ]
+            },
+            "owner2Quantity": {
+              "type": "number",
+              "minimum": 0
+            },
+            "warehouseId": {
+              "type": "string",
+              "enum": [
+                "beijing",
+                "hengdian"
+              ]
+            },
+            "serials": {
+              "type": "array",
+              "maxItems": 10000,
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              }
+            },
+            "note": {
+              "type": "string",
+              "maxLength": 10000
+            },
+            "unmanaged": {
+              "type": "boolean"
+            },
+            "allocationId": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "createEquipment": {
+              "type": "boolean"
+            },
+            "category": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "categoryId": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "categoryGroup": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "unit": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 20
+            },
+            "assetId": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "initial": {
+              "type": "object",
+              "required": [
+                "total",
+                "beijing",
+                "hengdian",
+                "outbounds"
+              ],
+              "properties": {
+                "total": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "beijing": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "hengdian": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "outbounds": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "name",
+                      "quantity"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 300
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "availableDate": {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      "kind": {
+                        "type": "string",
+                        "enum": [
+                          "CREW",
+                          "OTHER"
+                        ]
+                      },
+                      "crewId": {
+                        "type": "string",
+                        "maxLength": 100
+                      },
+                      "relatedCrewId": {
+                        "type": "string",
+                        "maxLength": 100
+                      },
+                      "groupName": {
+                        "type": "string",
+                        "maxLength": 100
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "warehouseId": {
+        "type": "string",
+        "enum": [
+          "beijing",
+          "hengdian"
+        ]
+      },
+      "startDate": {
+        "type": "string",
+        "format": "date"
+      },
+      "availableDate": {
+        "anyOf": [
+          {
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "crewId": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "groupName": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "note": {
+        "type": "string",
+        "maxLength": 10000
+      },
+      "importId": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "reason": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "targetWarehouseId": {
+        "type": "string",
+        "enum": [
+          "beijing",
+          "hengdian"
+        ]
+      },
+      "returnDate": {
+        "type": "string",
+        "format": "date"
+      }
+    }
+  },
+  "row": {
+    "type": "object",
+    "required": [
+      "quantity"
+    ],
+    "additionalProperties": true,
+    "properties": {
+      "equipmentId": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "rawName": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "quantity": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 10000000
+      },
+      "partNo": {
+        "type": "string",
+        "maxLength": 80
+      },
+      "ownerId": {
+        "type": "integer",
+        "enum": [
+          1,
+          2
+        ]
+      },
+      "owner2Quantity": {
+        "type": "number",
+        "minimum": 0
+      },
+      "warehouseId": {
+        "type": "string",
+        "enum": [
+          "beijing",
+          "hengdian"
+        ]
+      },
+      "serials": {
+        "type": "array",
+        "maxItems": 10000,
+        "items": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        }
+      },
+      "note": {
+        "type": "string",
+        "maxLength": 10000
+      },
+      "unmanaged": {
+        "type": "boolean"
+      },
+      "allocationId": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "createEquipment": {
+        "type": "boolean"
+      },
+      "category": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "categoryId": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "categoryGroup": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "unit": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 20
+      },
+      "assetId": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "initial": {
+        "type": "object",
+        "required": [
+          "total",
+          "beijing",
+          "hengdian",
+          "outbounds"
+        ],
+        "properties": {
+          "total": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "beijing": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "hengdian": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "outbounds": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "quantity"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "quantity": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "availableDate": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "CREW",
+                    "OTHER"
+                  ]
+                },
+                "crewId": {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                "relatedCrewId": {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                "groupName": {
+                  "type": "string",
+                  "maxLength": 100
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "str": {
+    "type": "string",
+    "maxLength": 500
+  },
+  "version": {
+    "type": "integer",
+    "minimum": 1
+  },
+  "login": {
+    "type": "object",
+    "required": [
+      "username",
+      "password"
+    ],
+    "properties": {
+      "username": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 80
+      },
+      "password": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      }
+    },
+    "additionalProperties": false
+  },
+  "user": {
+    "type": "object",
+    "required": [
+      "username",
+      "password",
+      "role"
+    ],
+    "properties": {
+      "username": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 80
+      },
+      "password": {
+        "type": "string",
+        "minLength": 12,
+        "maxLength": 200
+      },
+      "role": {
+        "type": "string",
+        "enum": [
+          "ADMIN",
+          "KEEPER",
+          "VIEWER"
+        ]
+      }
+    },
+    "additionalProperties": false
+  },
+  "crew": {
+    "type": "object",
+    "required": [
+      "name",
+      "kind",
+      "groups"
+    ],
+    "properties": {
+      "name": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      },
+      "kind": {
+        "type": "string",
+        "enum": [
+          "CREW",
+          "COMPANY"
+        ]
+      },
+      "contact": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "phone": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "status": {
+        "type": "string",
+        "enum": [
+          "PREPARING",
+          "ACTIVE",
+          "FINISHED"
+        ]
+      },
+      "groups": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 30,
+        "items": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        }
+      }
+    },
+    "additionalProperties": false
+  },
+  "categoryGroupEdit": {
+    "type": "object",
+    "required": [
+      "name",
+      "active"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "name": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100,
+        "pattern": "\\S"
+      },
+      "active": {
+        "type": "boolean"
+      }
+    }
+  },
+  "categoryEdit": {
+    "type": "object",
+    "required": [
+      "name",
+      "active",
+      "groupId"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "name": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100,
+        "pattern": "\\S"
+      },
+      "active": {
+        "type": "boolean"
+      },
+      "groupId": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "minLength": 1,
+        "maxLength": 100
+      }
+    }
+  },
+  "update": {
+    "type": "object",
+    "required": [
+      "expectedVersion",
+      "payload"
+    ],
+    "properties": {
+      "expectedVersion": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "payload": {
+        "type": "object",
+        "required": [
+          "rows"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "rows": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 3000,
+            "items": {
+              "type": "object",
+              "required": [
+                "quantity"
+              ],
+              "additionalProperties": true,
+              "properties": {
+                "equipmentId": {
+                  "type": "string",
+                  "maxLength": 500
+                },
+                "rawName": {
+                  "type": "string",
+                  "maxLength": 500
+                },
+                "quantity": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 10000000
+                },
+                "partNo": {
+                  "type": "string",
+                  "maxLength": 80
+                },
+                "ownerId": {
+                  "type": "integer",
+                  "enum": [
+                    1,
+                    2
+                  ]
+                },
+                "owner2Quantity": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "warehouseId": {
+                  "type": "string",
+                  "enum": [
+                    "beijing",
+                    "hengdian"
+                  ]
+                },
+                "serials": {
+                  "type": "array",
+                  "maxItems": 10000,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100
+                  }
+                },
+                "note": {
+                  "type": "string",
+                  "maxLength": 10000
+                },
+                "unmanaged": {
+                  "type": "boolean"
+                },
+                "allocationId": {
+                  "type": "string",
+                  "maxLength": 500
+                },
+                "createEquipment": {
+                  "type": "boolean"
+                },
+                "category": {
+                  "type": "string",
+                  "maxLength": 500
+                },
+                "categoryId": {
+                  "type": "string",
+                  "maxLength": 500
+                },
+                "categoryGroup": {
+                  "type": "string",
+                  "maxLength": 500
+                },
+                "unit": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 20
+                },
+                "assetId": {
+                  "type": "string",
+                  "maxLength": 500
+                },
+                "initial": {
+                  "type": "object",
+                  "required": [
+                    "total",
+                    "beijing",
+                    "hengdian",
+                    "outbounds"
+                  ],
+                  "properties": {
+                    "total": {
+                      "type": [
+                        "number",
+                        "null"
+                      ],
+                      "minimum": 0
+                    },
+                    "beijing": {
+                      "type": [
+                        "number",
+                        "null"
+                      ],
+                      "minimum": 0
+                    },
+                    "hengdian": {
+                      "type": [
+                        "number",
+                        "null"
+                      ],
+                      "minimum": 0
+                    },
+                    "outbounds": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "name",
+                          "quantity"
+                        ],
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 300
+                          },
+                          "quantity": {
+                            "type": "number",
+                            "minimum": 0
+                          },
+                          "availableDate": {
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "kind": {
+                            "type": "string",
+                            "enum": [
+                              "CREW",
+                              "OTHER"
+                            ]
+                          },
+                          "crewId": {
+                            "type": "string",
+                            "maxLength": 100
+                          },
+                          "relatedCrewId": {
+                            "type": "string",
+                            "maxLength": 100
+                          },
+                          "groupName": {
+                            "type": "string",
+                            "maxLength": 100
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "warehouseId": {
+            "type": "string",
+            "enum": [
+              "beijing",
+              "hengdian"
+            ]
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "availableDate": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "crewId": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "groupName": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 10000
+          },
+          "importId": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "targetWarehouseId": {
+            "type": "string",
+            "enum": [
+              "beijing",
+              "hengdian"
+            ]
+          },
+          "returnDate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    },
+    "additionalProperties": false
+  },
+  "confirm": {
+    "type": "object",
+    "required": [
+      "expectedVersion",
+      "idempotencyKey"
+    ],
+    "properties": {
+      "expectedVersion": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "idempotencyKey": {
+        "type": "string",
+        "minLength": 8,
+        "maxLength": 100
+      }
+    },
+    "additionalProperties": false
+  },
+  "action": {
+    "type": "object",
+    "required": [
+      "expectedVersion"
+    ],
+    "properties": {
+      "expectedVersion": {
+        "type": "integer",
+        "minimum": 1
+      }
+    },
+    "additionalProperties": false
+  },
+  "extend": {
+    "type": "object",
+    "required": [
+      "expectedVersion",
+      "availableDate",
+      "reason"
+    ],
+    "properties": {
+      "expectedVersion": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "availableDate": {
+        "type": "string",
+        "format": "date"
+      },
+      "reason": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 500
+      }
+    },
+    "additionalProperties": false
+  },
+  "corrections": {
+    "type": "object",
+    "required": [
+      "expectedVersion",
+      "rows",
+      "reason"
+    ],
+    "properties": {
+      "expectedVersion": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "rows": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 3000,
+        "items": {
+          "type": "object",
+          "required": [
+            "quantity"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "equipmentId": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "rawName": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "quantity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 10000000
+            },
+            "partNo": {
+              "type": "string",
+              "maxLength": 80
+            },
+            "ownerId": {
+              "type": "integer",
+              "enum": [
+                1,
+                2
+              ]
+            },
+            "owner2Quantity": {
+              "type": "number",
+              "minimum": 0
+            },
+            "warehouseId": {
+              "type": "string",
+              "enum": [
+                "beijing",
+                "hengdian"
+              ]
+            },
+            "serials": {
+              "type": "array",
+              "maxItems": 10000,
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              }
+            },
+            "note": {
+              "type": "string",
+              "maxLength": 10000
+            },
+            "unmanaged": {
+              "type": "boolean"
+            },
+            "allocationId": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "createEquipment": {
+              "type": "boolean"
+            },
+            "category": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "categoryId": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "categoryGroup": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "unit": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 20
+            },
+            "assetId": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "initial": {
+              "type": "object",
+              "required": [
+                "total",
+                "beijing",
+                "hengdian",
+                "outbounds"
+              ],
+              "properties": {
+                "total": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "beijing": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "hengdian": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "outbounds": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "name",
+                      "quantity"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 300
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "availableDate": {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      "kind": {
+                        "type": "string",
+                        "enum": [
+                          "CREW",
+                          "OTHER"
+                        ]
+                      },
+                      "crewId": {
+                        "type": "string",
+                        "maxLength": 100
+                      },
+                      "relatedCrewId": {
+                        "type": "string",
+                        "maxLength": 100
+                      },
+                      "groupName": {
+                        "type": "string",
+                        "maxLength": 100
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "reason": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1000
+      }
+    },
+    "additionalProperties": false
+  },
+  "assetAction": {
+    "type": "object",
+    "required": [
+      "action",
+      "quantity",
+      "reason"
+    ],
+    "properties": {
+      "action": {
+        "type": "string",
+        "enum": [
+          "SALE",
+          "SCRAP",
+          "ADJUST"
+        ]
+      },
+      "quantity": {
+        "type": "number",
+        "minimum": 0
+      },
+      "reason": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1000
+      }
+    },
+    "additionalProperties": false
+  },
+  "asset": {
+    "type": "object",
+    "required": [
+      "ownerId",
+      "serial",
+      "reason"
+    ],
+    "properties": {
+      "ownerId": {
+        "type": "integer",
+        "enum": [
+          1,
+          2
+        ]
+      },
+      "serial": {
+        "type": "string",
+        "minLength": 0,
+        "maxLength": 100
+      },
+      "reason": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1000
+      }
+    },
+    "additionalProperties": false
+  },
+  "parse": {
+    "type": "object",
+    "required": [],
+    "properties": {
+      "sheet": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "startRow": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "endRow": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "mapping": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string",
+          "pattern": "^[A-Z]{1,2}$"
+        }
+      },
+      "templateId": {
+        "type": "string",
+        "maxLength": 500
+      }
+    },
+    "additionalProperties": false
+  },
+  "importCategories": {
+    "type": "object",
+    "required": [
+      "groupName"
+    ],
+    "properties": {
+      "groupName": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100,
+        "pattern": "\\S"
+      }
+    },
+    "additionalProperties": false
+  },
+  "importRows": {
+    "type": "object",
+    "required": [
+      "rows"
+    ],
+    "properties": {
+      "rows": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 3000,
+        "items": {
+          "type": "object",
+          "required": [
+            "quantity"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "equipmentId": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "rawName": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "quantity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 10000000
+            },
+            "partNo": {
+              "type": "string",
+              "maxLength": 80
+            },
+            "ownerId": {
+              "type": "integer",
+              "enum": [
+                1,
+                2
+              ]
+            },
+            "owner2Quantity": {
+              "type": "number",
+              "minimum": 0
+            },
+            "warehouseId": {
+              "type": "string",
+              "enum": [
+                "beijing",
+                "hengdian"
+              ]
+            },
+            "serials": {
+              "type": "array",
+              "maxItems": 10000,
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              }
+            },
+            "note": {
+              "type": "string",
+              "maxLength": 10000
+            },
+            "unmanaged": {
+              "type": "boolean"
+            },
+            "allocationId": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "createEquipment": {
+              "type": "boolean"
+            },
+            "category": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "categoryId": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "categoryGroup": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "unit": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 20
+            },
+            "assetId": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "initial": {
+              "type": "object",
+              "required": [
+                "total",
+                "beijing",
+                "hengdian",
+                "outbounds"
+              ],
+              "properties": {
+                "total": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "beijing": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "hengdian": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "outbounds": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "name",
+                      "quantity"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 300
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "availableDate": {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      "kind": {
+                        "type": "string",
+                        "enum": [
+                          "CREW",
+                          "OTHER"
+                        ]
+                      },
+                      "crewId": {
+                        "type": "string",
+                        "maxLength": 100
+                      },
+                      "relatedCrewId": {
+                        "type": "string",
+                        "maxLength": 100
+                      },
+                      "groupName": {
+                        "type": "string",
+                        "maxLength": 100
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "additionalProperties": true
+  },
+  "template": {
+    "type": "object",
+    "required": [
+      "name",
+      "kind",
+      "mapping"
+    ],
+    "properties": {
+      "name": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100
+      },
+      "kind": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "mapping": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string",
+          "pattern": "^[A-Z]{1,2}$"
+        }
+      }
+    },
+    "additionalProperties": true
+  },
+  "relatedCrew": {
+    "type": "object",
+    "required": [
+      "expectedVersion",
+      "relatedCrewId"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "expectedVersion": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "relatedCrewId": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "maxLength": 100
+      }
+    }
+  }
+}

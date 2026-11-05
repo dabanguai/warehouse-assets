@@ -1,0 +1,28 @@
+{
+  "name": "yingchang-warehouse",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/api",
+    "apps/miniapp"
+  ],
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev:api": "npm run dev -w @yingchang/api",
+    "build:api": "npm run build -w @yingchang/api",
+    "start:api": "npm run start -w @yingchang/api",
+    "db:export": "node scripts/export-sqlite.mjs",
+    "db:import": "node scripts/api.mjs import",
+    "dev:h5": "npm run dev:h5 -w @yingchang/miniapp",
+    "build:h5": "npm run build:h5 -w @yingchang/miniapp",
+    "build:weixin": "npm run build:weixin -w @yingchang/miniapp",
+    "check": "npm run check -w @yingchang/api && npm run check -w @yingchang/miniapp",
+    "test": "npm run test -w @yingchang/api && npm run test:migration && npm run test:ui",
+    "test:migration": "node --test scripts/test/export-sqlite.test.mjs",
+    "setup": "node scripts/setup.mjs",
+    "dev": "node scripts/dev.mjs",
+    "test:ui": "node --test apps/miniapp/test/session.test.mjs apps/miniapp/test/pickers.test.cjs"
+  }
+}

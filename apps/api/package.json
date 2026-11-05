@@ -1,0 +1,13 @@
+{
+  "name": "@yingchang/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node ../../scripts/api.mjs dev",
+    "start": "node ../../scripts/api.mjs start",
+    "build": "node ../../scripts/api.mjs build",
+    "check": "node ../../scripts/api.mjs check",
+    "test": "node ../../scripts/api.mjs test"
+  }
+}

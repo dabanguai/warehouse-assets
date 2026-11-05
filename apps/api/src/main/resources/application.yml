@@ -1,0 +1,26 @@
+server:
+  address: ${HOST:127.0.0.1}
+  port: ${PORT:3100}
+  error:
+    include-message: never
+spring:
+  datasource:
+    url: ${MYSQL_URL:jdbc:mysql://127.0.0.1:3306/warehouse?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai}
+    username: ${MYSQL_USER:warehouse}
+    password: ${MYSQL_PASSWORD:}
+    hikari:
+      transaction-isolation: TRANSACTION_READ_COMMITTED
+  flyway:
+    enabled: true
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 21MB
+warehouse:
+  data-dir: ${DATA_DIR:../../data}
+  python: ${PYTHON:python}
+  workbook-script: ${WORKBOOK_SCRIPT:python/workbook.py}
+  h5-dir: ${H5_DIR:../miniapp/dist/build/h5}
+  admin-username: ${ADMIN_USERNAME:admin}
+  admin-password: ${ADMIN_PASSWORD:}
+  cors-origin: ${CORS_ORIGIN:http://127.0.0.1:5173}

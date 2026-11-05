@@ -1,0 +1,7 @@
+{
+ "name":"@yingchang/miniapp","version":"0.1.0","private":true,
+ "scripts":{"dev:h5":"uni --host 127.0.0.1","dev:weixin":"uni -p mp-weixin","build:h5":"uni build","build:weixin":"uni build -p mp-weixin","check":"vue-tsc --noEmit"},
+ "dependencies":{"@dcloudio/uni-app":"3.0.0-5030420261029002","@dcloudio/uni-components":"3.0.0-5030420261029002","@dcloudio/uni-h5":"3.0.0-5030420261029002","@dcloudio/uni-mp-weixin":"3.0.0-5030420261029002","vue":"3.4.21","vue-i18n":"9.14.5"},
+ "devDependencies":{"@dcloudio/types":"3.4.31","@dcloudio/vite-plugin-uni":"3.0.0-5030420261029002","@dcloudio/uni-cli-shared":"3.0.0-5030420261029002","@vue/tsconfig":"0.7.0","@vue/runtime-core":"3.4.21","typescript":"5.8.3","vite":"5.2.8","vue-tsc":"2.2.12"}
+}
+
